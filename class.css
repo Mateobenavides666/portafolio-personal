@@ -1,0 +1,376 @@
+/* ==========================================================
+   Portafolio de Mateo Benavides
+   Reemplaza TODO el contenido de tu class.css por este archivo
+   ========================================================== */
+
+:root {
+  --tinta: #1b2333;
+  --papel: #f3f4f7;
+  --superficie: #ffffff;
+  --texto: #252d3d;
+  --apagado: #5d6779;
+  --linea: #dcdfe6;
+  --acento: #b3261e;
+  --acento-oscuro: #8f1f18;
+  --acento-suave: #fbeceb;
+  --acento-claro: #ff9f96;
+
+  --fuente-titulo: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --fuente-texto: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--texto);
+  font-family: var(--fuente-texto);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+/* ---------- Foco visible para teclado ---------- */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #2f6fed;
+  outline-offset: 2px;
+}
+
+/* ---------- Encabezado (foto, nombre y contacto) ---------- */
+
+.hero {
+  background: var(--tinta);
+  color: #ffffff;
+  padding: 56px 24px;
+}
+
+.hero-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.foto {
+  flex: none;
+  width: 176px;
+  height: 176px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 30%;
+  border: 4px solid var(--acento);
+  display: block;
+}
+
+.hero h1 {
+  font-family: var(--fuente-titulo);
+  font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+}
+
+.cargo {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--acento-claro);
+  margin: 0;
+}
+
+.resumen {
+  max-width: 56ch;
+  color: #c9cfdb;
+  margin: 12px 0 20px;
+}
+
+.contacto {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.contacto a,
+.contacto span {
+  color: #ffffff;
+}
+
+.contacto a {
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+  text-underline-offset: 4px;
+}
+
+.contacto a:hover {
+  text-decoration-color: var(--acento-claro);
+}
+
+.btn-pdf {
+  font: inherit;
+  font-weight: 600;
+  color: #ffffff;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  border-radius: 6px;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-pdf:hover {
+  background: #ffffff;
+  color: var(--tinta);
+}
+
+/* ---------- Secciones ---------- */
+
+.contenedor {
+  max-width: 1080px;
+  margin: 40px auto 0;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.columna {
+  background: var(--superficie);
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  padding: 28px;
+}
+
+.columna.ancha {
+  grid-column: 1 / -1;
+}
+
+.columna h2 {
+  font-family: var(--fuente-titulo);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--tinta);
+  margin: 0 0 20px;
+}
+
+/* ---------- Línea de tiempo (historial académico y laboral) ---------- */
+
+.linea-tiempo {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0 0 0 22px;
+  border-left: 2px solid var(--linea);
+}
+
+.linea-tiempo li {
+  position: relative;
+  margin: 0;
+  padding: 4px 8px 14px 8px;
+  border-radius: 4px;
+}
+
+.linea-tiempo li:last-child {
+  padding-bottom: 4px;
+}
+
+.linea-tiempo li::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: 12px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--superficie);
+  border: 2px solid var(--acento);
+}
+
+/* El ítem recién agregado se resalta un momento */
+.linea-tiempo li.nuevo {
+  animation: resaltar 1.6s ease-out;
+}
+
+@keyframes resaltar {
+  from {
+    background: var(--acento-suave);
+  }
+  to {
+    background: transparent;
+  }
+}
+
+/* ---------- Formulario para agregar ítems ---------- */
+
+.agregar {
+  display: flex;
+  gap: 10px;
+}
+
+.agregar input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 0.98rem;
+  color: var(--texto);
+  background: #ffffff;
+  border: 1px solid var(--linea);
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.agregar input::placeholder {
+  color: #7a8496;
+}
+
+.agregar button {
+  font: inherit;
+  font-weight: 600;
+  color: #ffffff;
+  background: var(--acento);
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 16px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.agregar button:hover {
+  background: var(--acento-oscuro);
+}
+
+/* ---------- Habilidades ---------- */
+
+.etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.etiquetas span {
+  background: var(--acento-suave);
+  color: #7d1a14;
+  font-weight: 500;
+  font-size: 0.98rem;
+  border-radius: 999px;
+  padding: 6px 16px;
+}
+
+/* ---------- Pie de página ---------- */
+
+footer {
+  text-align: center;
+  color: var(--apagado);
+  font-size: 0.95rem;
+  padding: 40px 24px 48px;
+}
+
+/* ---------- Celular ---------- */
+
+@media (max-width: 760px) {
+  .hero {
+    padding: 40px 20px;
+  }
+
+  .hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .foto {
+    width: 140px;
+    height: 140px;
+  }
+
+  .contenedor {
+    grid-template-columns: 1fr;
+    margin-top: 24px;
+    padding: 0 16px;
+  }
+
+  .columna {
+    padding: 22px;
+  }
+
+  .agregar {
+    flex-direction: column;
+  }
+
+  .agregar button {
+    width: 100%;
+  }
+}
+
+/* ---------- Respeta a quien reduce las animaciones ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- Al imprimir o guardar como PDF ---------- */
+
+@media print {
+  body {
+    background: #ffffff;
+  }
+
+  .hero {
+    background: #ffffff;
+    color: #000000;
+    padding: 0 0 16px;
+    border-bottom: 2px solid #000000;
+  }
+
+  .hero h1,
+  .resumen,
+  .contacto a,
+  .contacto span {
+    color: #000000;
+  }
+
+  .cargo {
+    color: var(--acento);
+  }
+
+  .btn-pdf,
+  .agregar {
+    display: none;
+  }
+
+  .contenedor {
+    display: block;
+    margin-top: 16px;
+    padding: 0;
+  }
+
+  .columna {
+    border: 0;
+    padding: 0;
+    margin-bottom: 20px;
+    break-inside: avoid;
+  }
+}

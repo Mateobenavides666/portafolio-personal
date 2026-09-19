@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mateo Benavides | Portafolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="class.css">
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <img class="foto" src="5f745589-d352-424c-956e-8790e11e0ce8.jpeg" alt="Foto de Mateo Benavides">
+
+      <div class="hero-texto">
+        <h1>Mateo Benavides</h1>
+        <p class="cargo">Comerciante y estudiante universitario</p>
+        <p class="resumen">Trabajo en la empresa familiar y estudio en la Universidad Santiago de Cali.</p>
+
+        <ul class="contacto">
+          <li><a href="mailto:Mateobenavidez03@gmail.com">Mateobenavidez03@gmail.com</a></li>
+          <li><a href="https://wa.me/573244285144">WhatsApp: 324 428 5144</a></li>
+          <li><span>Cali, Colombia</span></li>
+        </ul>
+
+        <button type="button" class="btn-pdf" onclick="window.print()">Guardar como PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="contenedor">
+
+    <section class="columna">
+      <h2>Historial académico</h2>
+      <!-- Los ítems se cargan desde clase.js -->
+      <ul id="lista-academica" class="linea-tiempo"></ul>
+
+      <div class="agregar">
+        <input type="text" id="input-academico" placeholder="Nuevo ítem académico..." aria-label="Nuevo ítem académico">
+        <button id="btn-academico">+ Agregar</button>
+      </div>
+    </section>
+
+    <section class="columna">
+      <h2>Historial laboral</h2>
+      <!-- Los ítems se cargan desde clase.js -->
+      <ul id="lista-laboral" class="linea-tiempo"></ul>
+
+      <div class="agregar">
+        <input type="text" id="input-laboral" placeholder="Nueva experiencia..." aria-label="Nueva experiencia laboral">
+        <button id="btn-laboral">+ Agregar</button>
+      </div>
+    </section>
+
+    <section class="columna ancha">
+      <h2>Habilidades</h2>
+      <div class="etiquetas">
+        <span>Atención al cliente</span>
+        <span>Ventas</span>
+        <span>Trabajo en equipo</span>
+        <span>Office</span>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Mateo Benavides
+  </footer>
+
+  <script src="clase.js"></script>
+</body>
+</html>
