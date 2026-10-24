@@ -6,6 +6,11 @@ const comicSchema = new mongoose.Schema({
   editorial: String,
   anio: Number,
   stock: { type: Number, default: 0 },
+  genero: String,
+  paginas: Number,
+  idioma: { type: String, default: 'Español' },
+  sinopsis: String,
+  portada: String,
   artista: { type: mongoose.Schema.Types.ObjectId, ref: 'Artista' }
 });
 

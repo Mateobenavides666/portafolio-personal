@@ -2,11 +2,15 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tienda Comics</title>
   <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-  <header><h1>Tienda Comics</h1></header>
+  <header>
+    <h1>Tienda Comics</h1>
+  </header>
+
   <main>
     <section>
       <h2>Nuevo artista</h2>
@@ -16,6 +20,7 @@
         <button type="submit">Crear artista</button>
       </form>
     </section>
+
     <section>
       <h2>Nuevo cómic</h2>
       <form id="form-comic">
@@ -24,10 +29,16 @@
         <input type="number" id="comic-anio" placeholder="Año">
         <input type="number" id="comic-precio" placeholder="Precio" required>
         <input type="number" id="comic-stock" placeholder="Stock">
+        <input type="text" id="comic-genero" placeholder="Género (ej: Drama)">
+        <input type="number" id="comic-paginas" placeholder="Páginas">
+        <input type="text" id="comic-idioma" placeholder="Idioma (ej: Español)">
+        <input type="text" id="comic-portada" placeholder="Portada (URL o portadas/archivo.jpg)">
+        <textarea id="comic-sinopsis" placeholder="Sinopsis" rows="3"></textarea>
         <select id="comic-artista" required></select>
         <button type="submit">Crear cómic</button>
       </form>
     </section>
+
     <section>
       <h2>Catálogo</h2>
       <div class="filtros">
@@ -37,6 +48,7 @@
       <div id="catalogo"></div>
     </section>
   </main>
+
   <p id="mensaje"></p>
   <script src="app.js"></script>
 </body>

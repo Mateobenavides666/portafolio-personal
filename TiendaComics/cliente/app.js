@@ -70,8 +70,25 @@ function pintar() {
     const card = document.createElement('div');
     card.className = 'card';
 
+    const portada = document.createElement('div');
+    portada.className = 'portada';
+    portada.textContent = c.titulo.charAt(0);
+    if (c.portada) {
+      const img = document.createElement('img');
+      img.alt = 'Portada de ' + c.titulo;
+      img.onload = () => {
+        portada.textContent = '';
+        portada.appendChild(img);
+      };
+      img.src = c.portada;
+    }
+
     const titulo = document.createElement('h3');
     titulo.textContent = c.titulo;
+
+    const genero = document.createElement('span');
+    genero.className = 'genero';
+    genero.textContent = c.genero || '';
 
     const autor = document.createElement('p');
     autor.className = 'autor';
@@ -80,6 +97,13 @@ function pintar() {
     const editorial = document.createElement('p');
     editorial.textContent = [c.editorial, c.anio].filter(Boolean).join(' · ');
 
+    const detalles = document.createElement('p');
+    detalles.textContent = [c.paginas ? c.paginas + ' págs.' : '', c.idioma].filter(Boolean).join(' · ');
+
+    const sinopsis = document.createElement('p');
+    sinopsis.className = 'sinopsis';
+    sinopsis.textContent = c.sinopsis || '';
+
     const precio = document.createElement('p');
     precio.className = 'precio';
     precio.textContent = dinero(c.precio);
@@ -87,7 +111,7 @@ function pintar() {
     const stock = document.createElement('p');
     stock.textContent = 'Stock: ' + (c.stock ?? 0);
 
-    card.append(titulo, autor, editorial, precio, stock);
+    card.append(portada, titulo, genero, autor, editorial, detalles, sinopsis, precio, stock);
     catalogo.appendChild(card);
   });
 }
@@ -127,7 +151,12 @@ document.getElementById('form-comic').addEventListener('submit', async (ev) => {
         editorial: document.getElementById('comic-editorial').value,
         anio: Number(document.getElementById('comic-anio').value) || undefined,
         precio: Number(document.getElementById('comic-precio').value),
-        stock: Number(document.getElementById('comic-stock').value) || 0
+        stock: Number(document.getElementById('comic-stock').value) || 0,
+        genero: document.getElementById('comic-genero').value,
+        paginas: Number(document.getElementById('comic-paginas').value) || undefined,
+        idioma: document.getElementById('comic-idioma').value || 'Español',
+        portada: document.getElementById('comic-portada').value,
+        sinopsis: document.getElementById('comic-sinopsis').value
       })
     });
     if (!res.ok) throw new Error((await res.json()).error);
