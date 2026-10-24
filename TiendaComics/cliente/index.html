@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tienda Comics</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <header><h1>Tienda Comics</h1></header>
+  <main>
+    <section>
+      <h2>Nuevo artista</h2>
+      <form id="form-artista">
+        <input type="text" id="artista-nombre" placeholder="Nombre" required>
+        <input type="text" id="artista-nacionalidad" placeholder="Nacionalidad">
+        <button type="submit">Crear artista</button>
+      </form>
+    </section>
+    <section>
+      <h2>Nuevo cómic</h2>
+      <form id="form-comic">
+        <input type="text" id="comic-titulo" placeholder="Título" required>
+        <input type="text" id="comic-editorial" placeholder="Editorial">
+        <input type="number" id="comic-anio" placeholder="Año">
+        <input type="number" id="comic-precio" placeholder="Precio" required>
+        <input type="number" id="comic-stock" placeholder="Stock">
+        <select id="comic-artista" required></select>
+        <button type="submit">Crear cómic</button>
+      </form>
+    </section>
+    <section>
+      <h2>Catálogo</h2>
+      <div class="filtros">
+        <select id="filtro-editorial"></select>
+        <select id="filtro-autor"></select>
+      </div>
+      <div id="catalogo"></div>
+    </section>
+  </main>
+  <p id="mensaje"></p>
+  <script src="app.js"></script>
+</body>
+</html>
