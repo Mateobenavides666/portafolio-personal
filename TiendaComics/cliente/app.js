@@ -5,6 +5,8 @@ const selectArtista = document.getElementById('comic-artista');
 const filtroEditorial = document.getElementById('filtro-editorial');
 const filtroAutor = document.getElementById('filtro-autor');
 const mensaje = document.getElementById('mensaje');
+const detalle = document.getElementById('detalle');
+const detalleContenido = document.getElementById('detalle-contenido');
 
 let todosLosComics = [];
 
@@ -15,6 +17,22 @@ function avisar(texto, error = false) {
 
 function dinero(n) {
   return '$' + Number(n).toLocaleString('es-CO');
+}
+
+function crearPortada(c, clase) {
+  const portada = document.createElement('div');
+  portada.className = clase;
+  portada.textContent = c.titulo.charAt(0);
+  if (c.portada) {
+    const img = document.createElement('img');
+    img.alt = 'Portada de ' + c.titulo;
+    img.onload = () => {
+      portada.textContent = '';
+      portada.appendChild(img);
+    };
+    img.src = c.portada;
+  }
+  return portada;
 }
 
 async function cargarArtistas() {
@@ -69,19 +87,11 @@ function pintar() {
   lista.forEach(c => {
     const card = document.createElement('div');
     card.className = 'card';
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', 'Ver detalles de ' + c.titulo);
 
-    const portada = document.createElement('div');
-    portada.className = 'portada';
-    portada.textContent = c.titulo.charAt(0);
-    if (c.portada) {
-      const img = document.createElement('img');
-      img.alt = 'Portada de ' + c.titulo;
-      img.onload = () => {
-        portada.textContent = '';
-        portada.appendChild(img);
-      };
-      img.src = c.portada;
-    }
+    const portada = crearPortada(c, 'portada');
 
     const titulo = document.createElement('h3');
     titulo.textContent = c.titulo;
@@ -112,9 +122,91 @@ function pintar() {
     stock.textContent = 'Stock: ' + (c.stock ?? 0);
 
     card.append(portada, titulo, genero, autor, editorial, detalles, sinopsis, precio, stock);
+
+    card.addEventListener('click', () => abrirDetalle(c));
+    card.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        abrirDetalle(c);
+      }
+    });
+
     catalogo.appendChild(card);
   });
 }
+
+function fila(etiqueta, valor) {
+  if (valor === undefined || valor === null || valor === '') return null;
+  const f = document.createElement('div');
+  f.className = 'fila';
+  const dt = document.createElement('span');
+  dt.className = 'etiqueta';
+  dt.textContent = etiqueta;
+  const dd = document.createElement('span');
+  dd.textContent = valor;
+  f.append(dt, dd);
+  return f;
+}
+
+function abrirDetalle(c) {
+  detalleContenido.innerHTML = '';
+
+  const contenedor = document.createElement('div');
+  contenedor.className = 'detalle';
+
+  const portada = crearPortada(c, 'portada grande');
+
+  const info = document.createElement('div');
+  info.className = 'info';
+
+  if (c.genero) {
+    const genero = document.createElement('span');
+    genero.className = 'genero';
+    genero.textContent = c.genero;
+    info.appendChild(genero);
+  }
+
+  const titulo = document.createElement('h2');
+  titulo.textContent = c.titulo;
+  info.appendChild(titulo);
+
+  const autor = document.createElement('p');
+  autor.className = 'autor-detalle';
+  autor.textContent = c.artista
+    ? [c.artista.nombre, c.artista.nacionalidad].filter(Boolean).join(' · ')
+    : 'Sin autor';
+  info.appendChild(autor);
+
+  const datos = document.createElement('div');
+  datos.className = 'datos';
+  [
+    fila('Editorial', c.editorial),
+    fila('Año', c.anio),
+    fila('Páginas', c.paginas),
+    fila('Idioma', c.idioma),
+    fila('Disponibles', c.stock ?? 0)
+  ].filter(Boolean).forEach(f => datos.appendChild(f));
+  info.appendChild(datos);
+
+  const sinopsis = document.createElement('p');
+  sinopsis.className = 'sinopsis-completa';
+  sinopsis.textContent = c.sinopsis || 'Este cómic aún no tiene sinopsis.';
+  info.appendChild(sinopsis);
+
+  const precio = document.createElement('p');
+  precio.className = 'precio-detalle';
+  precio.textContent = dinero(c.precio);
+  info.appendChild(precio);
+
+  contenedor.append(portada, info);
+  detalleContenido.appendChild(contenedor);
+  detalle.showModal();
+}
+
+document.getElementById('detalle-cerrar').addEventListener('click', () => detalle.close());
+detalle.addEventListener('click', (ev) => {
+  if (ev.target === detalle) detalle.close();
+});
 
 filtroEditorial.addEventListener('change', pintar);
 filtroAutor.addEventListener('change', pintar);
