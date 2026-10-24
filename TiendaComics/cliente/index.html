@@ -26,11 +26,11 @@
       <form id="form-comic">
         <input type="text" id="comic-titulo" placeholder="Título" required>
         <input type="text" id="comic-editorial" placeholder="Editorial">
-        <input type="number" id="comic-anio" placeholder="Año">
-        <input type="number" id="comic-precio" placeholder="Precio" required>
-        <input type="number" id="comic-stock" placeholder="Stock">
+        <input type="number" id="comic-anio" placeholder="Año" min="1800" max="2026">
+        <input type="number" id="comic-precio" placeholder="Precio" required min="1">
+        <input type="number" id="comic-stock" placeholder="Stock" min="0">
         <input type="text" id="comic-genero" placeholder="Género (ej: Drama)">
-        <input type="number" id="comic-paginas" placeholder="Páginas">
+        <input type="number" id="comic-paginas" placeholder="Páginas" min="1">
         <input type="text" id="comic-idioma" placeholder="Idioma (ej: Español)">
         <input type="text" id="comic-portada" placeholder="Portada (URL o portadas/archivo.jpg)">
         <textarea id="comic-sinopsis" placeholder="Sinopsis" rows="3"></textarea>
